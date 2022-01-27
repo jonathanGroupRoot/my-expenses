@@ -16,7 +16,7 @@ services:
   app:
     restart: always
     build: .
-    container_name: dockercontainernodejs
+    container_name: dockercontainermyexpanses
     ports:
       - 3333:3333
     volumes:
