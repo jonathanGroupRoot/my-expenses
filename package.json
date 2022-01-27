@@ -1,0 +1,17 @@
+{
+  "name": "my-expenses",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jonathanGroupRoot/my-expenses.git",
+  "author": "Jonathan Vinicius Braz Silva <jonathangrouproot@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.8.1",
+    "express": "^4.17.2",
+    "prisma": "^3.8.1"
+  }
+}
