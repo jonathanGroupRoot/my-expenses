@@ -29,4 +29,33 @@ export class UserRepository implements IUserRepository {
 
         return result;
     }
+
+    async updateUser({ id, name, email, password }: User): Promise<void> {
+        await prisma.user.updateMany({
+            where: {
+                id,
+            },
+            data: {
+                name,
+                email,
+                password,
+            },
+        });
+    }
+
+    async deleteUser(id: string): Promise<void> {
+        await prisma.user.delete({
+            where: {
+                id,
+            },
+        });
+    }
+
+    async findById(id: string): Promise<User> {
+        return prisma.user.findFirst({
+            where: {
+                id,
+            },
+        });
+    }
 }
