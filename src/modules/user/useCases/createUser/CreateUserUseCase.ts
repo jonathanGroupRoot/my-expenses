@@ -13,7 +13,7 @@ export class CreateUserUseCase {
         private userRepository: IUserRepository,
     ) {}
 
-    async createUser({ name, email, password }: User) {
+    async createUser({ name, email, password }: User): Promise<User> {
         const userExists = await this.userRepository.findUserByEmail(email);
 
         if (userExists) {
@@ -22,6 +22,12 @@ export class CreateUserUseCase {
 
         const passwordHash = await hash(password, 10);
 
-        await this.userRepository.save({ name, email, password: passwordHash });
+        const user = await this.userRepository.save({
+            name,
+            email,
+            password: passwordHash,
+        });
+
+        return user;
     }
 }

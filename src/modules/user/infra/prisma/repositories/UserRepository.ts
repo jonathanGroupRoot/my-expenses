@@ -6,8 +6,8 @@ import { User } from '../entities/User';
 const prisma = new PrismaClient();
 
 export class UserRepository implements IUserRepository {
-    async save({ name, email, password }: User): Promise<void> {
-        await prisma.user.create({
+    async save({ name, email, password }: User): Promise<User> {
+        return prisma.user.create({
             data: {
                 name,
                 email,

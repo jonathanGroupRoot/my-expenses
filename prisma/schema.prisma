@@ -14,5 +14,29 @@ model User {
     password   String
     created_at DateTime @default(now())
 
+    Despenses Despenses[]
     @@map("user")
+}
+
+model Despenses {
+    id            String          @id @default(uuid())
+    name          String
+    categorie     String
+    description   String?
+    due_date      DateTime @db.Date
+    value         Float
+    repetitions   Int?
+    status        DespensesStatus @default(active)
+    created_at    DateTime        @default(now())
+    finish_status DateTime?       @default(now()) @updatedAt
+    user          User            @relation(fields: [id_user], references: [id])
+    id_user       String
+
+
+    @@map("despenses")
+}
+
+enum DespensesStatus {
+    active
+    inactive
 }
