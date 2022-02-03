@@ -36,8 +36,8 @@ export class CreateDespenseUseCase {
             });
         }
 
-        for (let i = 0; i < repetitions; i += 1) {
-            const alter_date = this.dateProvider.addMonth(i);
+        for (let interations = 0; interations < repetitions; interations += 1) {
+            const alter_date = this.dateProvider.addMonth(interations);
             this.despenseRepository.save({
                 name,
                 categorie,
