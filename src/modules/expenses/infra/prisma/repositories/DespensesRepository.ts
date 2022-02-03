@@ -37,7 +37,6 @@ export class DespensesRepository implements IDespensesRepository {
         categorie,
         description,
         due_date,
-        value,
         repetitions,
     }: Despenses): Promise<void> {
         await prisma.despenses.update({
@@ -49,7 +48,6 @@ export class DespensesRepository implements IDespensesRepository {
                 categorie,
                 description,
                 due_date,
-                value,
                 repetitions,
             },
         });

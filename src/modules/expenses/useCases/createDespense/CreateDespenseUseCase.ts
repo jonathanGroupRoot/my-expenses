@@ -2,12 +2,15 @@ import { inject, injectable } from 'tsyringe';
 
 import { Despenses } from '@modules/expenses/infra/prisma/entities/Despenses';
 import { IDespensesRepository } from '@modules/expenses/repositories/IDespenses';
+import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 
 @injectable()
 export class CreateDespenseUseCase {
     constructor(
         @inject('DespensesRepository')
         private despenseRepository: IDespensesRepository,
+        @inject('DayjsDateProvider')
+        private dateProvider: IDateProvider,
     ) {}
 
     async execute({
@@ -20,15 +23,31 @@ export class CreateDespenseUseCase {
         status,
         id_user,
     }: Despenses): Promise<void> {
-        await this.despenseRepository.save({
-            name,
-            categorie,
-            description,
-            due_date,
-            value,
-            repetitions,
-            status,
-            id_user,
-        });
+        if (!repetitions) {
+            await this.despenseRepository.save({
+                name,
+                categorie,
+                description,
+                due_date,
+                value,
+                repetitions,
+                status,
+                id_user,
+            });
+        }
+
+        for (let i = 0; i < repetitions; i += 1) {
+            const alter_date = this.dateProvider.addMonth(i);
+            this.despenseRepository.save({
+                name,
+                categorie,
+                description,
+                due_date: alter_date,
+                value,
+                repetitions,
+                status,
+                id_user,
+            });
+        }
     }
 }

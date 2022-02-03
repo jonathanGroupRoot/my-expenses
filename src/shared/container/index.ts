@@ -1,4 +1,5 @@
 import { container } from 'tsyringe';
+import '@shared/container/providers';
 
 import { DespensesRepository } from '@modules/expenses/infra/prisma/repositories/DespensesRepository';
 import { IDespensesRepository } from '@modules/expenses/repositories/IDespenses';
