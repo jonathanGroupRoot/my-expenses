@@ -59,49 +59,6 @@
             }
         },
         "/user": {
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Create user",
-                "description": "Create user",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        ",type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    }
-                                },
-                                "example": {
-                                    "name": "jonathan",
-                                    "email": "jonathanroot@gmail.com",
-                                    "password": "test123"
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "$ref": "#/components/responses/201"
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/500"
-                    }
-                }
-            },
             "get": {
                 "tags": [
                     "User"
@@ -150,6 +107,50 @@
                     }
                 }
             },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create user",
+                "description": "Create user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        ",type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "jonathan",
+                                    "email": "jonathanroot@gmail.com",
+                                    "password": "test123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            
             "put": {
                 "tags": [
                     "User"
@@ -226,69 +227,6 @@
             }
         },
         "/despenses": {
-            "post": {
-                "tags": [
-                    "Despenses"
-                ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "summary": "Create despenses",
-                "description": "Create despenses",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "categorie": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "due_date": {
-                                        "type": "date"
-                                    },
-                                    "value": {
-                                        "type": "number"
-                                    },
-                                    "repetitions": {
-                                        "type": "number"
-                                    },
-                                    "status": {
-                                        "type": "enum"
-                                    }
-                                },
-                                "example": {
-                                    "name": "jonathan",
-                                    "categorie": "card",
-                                    "description": "gasto com cartão nubank",
-                                    "due_date": "2022-01-31T19:29:42.968Z",
-                                    "value": 300,
-                                    "repetitions": 1
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "$ref": "#/components/responses/201"
-                    },
-                    "401": {
-                        "$ref": "#/components/responses/401"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/500"
-                    }
-                }
-            },
             "get": {
                 "tags": [
                     "Despenses"
@@ -341,6 +279,82 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/despenses/{id}": {
+            "post": {
+                "tags": [
+                    "Despenses"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Create despenses",
+                "description": "Create despenses",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "categorie": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "due_date": {
+                                        "type": "date"
+                                    },
+                                    "value": {
+                                        "type": "number"
+                                    },
+                                    "repetitions": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "enum"
+                                    }
+                                },
+                                "example": {
+                                    "name": "jonathan",
+                                    "categorie": "card",
+                                    "description": "gasto com cartão nubank",
+                                    "due_date": "2022-01-31T19:29:42.968Z",
+                                    "value": 300,
+                                    "repetitions": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
