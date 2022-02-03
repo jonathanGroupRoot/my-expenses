@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
+import auth from '@config/auth';
 import { AppError } from '@shared/errors/AppError';
-
-import auth from '../../../../../config/auth';
 
 interface IPayload {
     sub: string;
@@ -22,7 +21,7 @@ export async function ensureAuthenticate(
     const [, token] = authHeader.split(' ');
 
     try {
-        const { sub: user_Id } = verify(token, auth.SECRET_TOKEN) as IPayload;
+        const { sub: user_Id } = verify(token, auth.secret_token) as IPayload;
 
         request.user = {
             id: user_Id,
