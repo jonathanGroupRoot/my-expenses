@@ -1,0 +1,550 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MyDespenses Documentation",
+        "description": "This is an API myDespenses",
+        "version": "1.0.0",
+        "contact": {
+            "email": "jonathangrouproot@gmail.com"
+        }
+    },
+    "paths": {
+        "/authenticate": {
+            "post": {
+                "tags": [
+                    "Authenticate User"
+                ],
+                "summary": "User authentication",
+                "description": "User authentication",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "email": "joaovitorsss@gmail.com",
+                                    "password": "123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucess",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "user_response": {
+                                        "value": {
+                                            "user": {
+                                                "email": "joaovitorsss@gmail.com"
+                                            },
+                                            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDM4MDM4NDcsImV4cCI6MTY0MzgwNDc0Nywic3ViIjoiNmQ5ZmY4YmItYjZiMy00N2Q4LWE5NzItOGQyYTlkOTkzMjljIn0.m1ICm0iCcHV7RggAknXZ0Vs2TihBEeuoG-EmyfQkpEw"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "List all user",
+                "description": "List all user",
+                "responses": {
+                    "200": {
+                        "description": "Sucess",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "user_response": {
+                                        "value": {
+                                            "user": [
+                                                {
+                                                    "id": "76466541-3f45-4e9c-acd1-60a2331348c8",
+                                                    "name": "Jonathan Vinicius",
+                                                    "email": "jonathangrouproot@gmail.com",
+                                                    "password": "$2b$10$OP.wR7Wc2dOBvcNj45o09eLwJj16/GYDxJ3SdEuqYsdxRdxYUTV7a",
+                                                    "created_at": "2022-01-28T20:10:33.353Z"
+                                                },
+                                                {
+                                                    "id": "2c6b8194-b049-4fa1-8bf1-f16775051020",
+                                                    "name": "DJ IVIS",
+                                                    "email": "joaovitworsss@gmail.com",
+                                                    "password": "$2b$10$4EmUQG1CmOX8CwmDi/nqeeEq1GSg9MAkm3V6VBTrHdla9zZSXCD/e",
+                                                    "created_at": "2022-01-31T19:29:42.968Z"
+                                                },
+                                                {
+                                                    "id": "6d9ff8bb-b6b3-47d8-a972-8d2a9d99329c",
+                                                    "name": "DJ IVIS",
+                                                    "email": "joaovitorsss@gmail.com",
+                                                    "password": "$2b$10$IBfWNKIDy3infoYsDTUBTelCElkTzm5.0CTY6Bl1VDdg4LqJN8CVa",
+                                                    "created_at": "2022-02-01T14:24:50.185Z"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create user",
+                "description": "Create user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        ",type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "jonathan",
+                                    "email": "jonathanroot@gmail.com",
+                                    "password": "test123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update a user according to the id passed..",
+                "description": "Update a user according to the id passed.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "name": "Jonathan Vinicius",
+                                    "email": "jonathangrouproot@gmail.com",
+                                    "password": "$2b$10$OP.wR7Wc2dOBvcNj45o09eLwJj16/GYDxJ3SdEuqYsdxRdxYUTV7a"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete User",
+                "description": "Delete User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/despenses": {
+            "get": {
+                "tags": [
+                    "Despenses"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "List all despenses",
+                "description": "List all despenses",
+                "responses": {
+                    "200": {
+                        "description": "Sucess",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "user_response": {
+                                        "value": {
+                                            "despenses": [
+                                                {
+                                                    "id": "dee7240a-6763-44b1-a281-64d816bb45ab",
+                                                    "name": "Pagar Cartão sicredi",
+                                                    "categorie": "card",
+                                                    "description": null,
+                                                    "due_date": "2022-01-31T00:00:00.000Z",
+                                                    "value": 200,
+                                                    "repetitions": null,
+                                                    "status": "active",
+                                                    "created_at": "2022-02-01T17:42:11.785Z",
+                                                    "finish_status": "2022-02-01T17:42:11.785Z",
+                                                    "id_user": "76466541-3f45-4e9c-acd1-60a2331348c8"
+                                                },
+                                                {
+                                                    "id": "6a50e669-8fd3-42c0-930e-8335d3a287dc",
+                                                    "name": "pagar cartão nubank",
+                                                    "categorie": "card nubank",
+                                                    "description": "cartão nubank",
+                                                    "due_date": "2022-01-31T00:00:00.000Z",
+                                                    "value": 500,
+                                                    "repetitions": 1,
+                                                    "status": "active",
+                                                    "created_at": "2022-02-01T17:42:00.310Z",
+                                                    "finish_status": "2022-02-01T17:55:11.777Z",
+                                                    "id_user": "76466541-3f45-4e9c-acd1-60a2331348c8"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/despenses/{id}": {
+            "post": {
+                "tags": [
+                    "Despenses"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Create despenses",
+                "description": "Create despenses",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "categorie": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "due_date": {
+                                        "type": "date"
+                                    },
+                                    "value": {
+                                        "type": "number"
+                                    },
+                                    "repetitions": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "enum"
+                                    }
+                                },
+                                "example": {
+                                    "name": "jonathan",
+                                    "categorie": "card",
+                                    "description": "gasto com cartão nubank",
+                                    "due_date": "2022-01-31T19:29:42.968Z",
+                                    "value": 300,
+                                    "repetitions": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Despenses"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Update a user according to the id passed..",
+                "description": "Update a user according to the id passed.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "name": "Jonathan Vinicius",
+                                    "email": "jonathangrouproot@gmail.com",
+                                    "password": "$2b$10$OP.wR7Wc2dOBvcNj45o09eLwJj16/GYDxJ3SdEuqYsdxRdxYUTV7a"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Despenses"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Delete User",
+                "description": "Delete User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "responses": {
+            "201": {
+                "description": "",
+                "content": {
+                    "application/json": {
+                        "examples": {
+                            "request-success": {}
+                        }
+                    }
+                }
+            },
+            "204": {
+                "description": "",
+                "content": {
+                    "application/json": {
+                        "examples": {
+                            "request-success": {}
+                        }
+                    }
+                }
+            },
+            "400": {
+                "description": "",
+                "content": {
+                    "application/json": {
+                        "examples": {
+                            "user-already-exists": {
+                                "value": {
+                                    "message": "user already exists"
+                                }
+                            },
+                            "token-does-not-exists": {
+                                "value": {
+                                    "message": "token does not exist"
+                                }
+                            },
+                            "user-or-password-incorrect": {
+                                "value": {
+                                    "message": "user or password incorrect"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "",
+                "content": {
+                    "application/json": {
+                        "examples": {
+                            "expired-token": {
+                                "value": {
+                                    "status": "401",
+                                    "message": "invalid token"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "",
+                "content": {
+                    "application/json": {
+                        "examples": {
+                            "failed-intern": {
+                                "value": {
+                                    "error": "internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
